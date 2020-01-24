@@ -9,10 +9,10 @@ public interface Input {
     class TouchEvent {
 
         /**
-         * @apiNote hand movements of the user:
-         * TOUCH_DOWN: when the finger touches the screen, touch_down event will be called.
-         * TOUCH_UP: when the finger touches the screen and then picks up, touch_up event will be called.
-         * TOUCH_MOVE: when finger moves on the screen, touch_move event will be called.
+         * @apiNote touch movements of the user:
+         * TOUCH_DOWN: when the finger touches the screen, touch-down event will be called.
+         * TOUCH_UP: when the finger touches the screen and then picks up, touch-up event will be called.
+         * TOUCH_MOVE: when finger moves on the screen, touch-move event will be called.
          */
         public static final int TOUCH_DOWN = 0;
         public static final int TOUCH_UP = 1;
@@ -33,24 +33,39 @@ public interface Input {
          */
         private int touchId;
 
+        /**
+         * @return the type of the touch event
+         */
         public int getType() {
             return type;
         }
 
+        /**
+         * @return the point of the touch event
+         */
         public Point getPoint() {
             return point;
         }
 
+        /**
+         * @return the touchId of the touch event
+         */
         public int getTouchId() {
             return touchId;
         }
     }
 
+    /**
+     * @param touchId the id of specific touch event
+     * @return true if the touch event that specified with this touch id be a touch-down event
+     */
     boolean isTouchDown(int touchId);
 
-    int getTouchX(int touchId);
-
-    int getTouchY(int touchId);
+    /**
+     * @param touchId the id of specific touch event
+     * @return the point of the touch event specified with this touch id
+     */
+    Point getTouchX(int touchId);
 
     /**
      * @return a list of touch events in the buffer
