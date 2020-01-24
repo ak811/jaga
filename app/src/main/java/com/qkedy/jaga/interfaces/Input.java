@@ -46,11 +46,11 @@ public interface Input {
         }
     }
 
-    boolean isTouchDown(int pointer);
+    boolean isTouchDown(int touchId);
 
-    int getTouchX(int pointer);
+    int getTouchX(int touchId);
 
-    int getTouchY(int pointer);
+    int getTouchY(int touchId);
 
     /**
      * @return a list of touch events in the buffer
