@@ -1,6 +1,6 @@
 package com.qkedy.jaga.interfaces;
 
-import com.qkedy.jaga.entities.Point;
+import com.qkedy.jaga.models.Point;
 
 import java.util.List;
 
