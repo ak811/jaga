@@ -2,6 +2,8 @@ package com.qkedy.jaga.interfaces;
 
 import android.app.Activity;
 
+import org.json.JSONException;
+
 public interface Game {
 
     Audio getAudio();
@@ -11,6 +13,12 @@ public interface Game {
     FileIO getFileIO();
 
     Graphics getGraphics();
+
+    void setScreen(Screen screen);
+
+    Screen getCurrentScreen();
+
+    Screen getInitScreen() throws JSONException;
 
     Activity getActivity();
 }
