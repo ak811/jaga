@@ -1,4 +1,10 @@
-package com.qkedy.jaga.entities;
+package com.qkedy.jaga.models;
+
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.util.Objects;
 
 public class Point {
 
@@ -48,5 +54,11 @@ public class Point {
         }
         final Point otherPoint = (Point) obj;
         return this.x == otherPoint.x && this.y == otherPoint.y;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }
