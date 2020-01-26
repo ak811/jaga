@@ -39,6 +39,14 @@ public interface Input extends TouchHandler {
         }
 
         /**
+         * @param type the type of touch event
+         * @apiNote sets the type of touch event
+         */
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        /**
          * @return the point of the touch event
          */
         public Point getPoint() {
@@ -46,10 +54,27 @@ public interface Input extends TouchHandler {
         }
 
         /**
+         * @param point the point of touch event
+         * @apiNote sets the point of touch event
+         */
+        public void setPoint(Point point) {
+            this.point.setX(point.getX());
+            this.point.setY(point.getY());
+        }
+
+        /**
          * @return the touchId of the touch event
          */
         public int getTouchId() {
             return touchId;
+        }
+
+        /**
+         * @param touchId the touch id of the touch event
+         * @apiNote sets the touch id of the touch event
+         */
+        public void setTouchId(int touchId) {
+            this.touchId = touchId;
         }
     }
 }

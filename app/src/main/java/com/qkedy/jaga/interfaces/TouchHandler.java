@@ -10,15 +10,17 @@ public interface TouchHandler extends OnTouchListener {
 
     /**
      * @param touchId the id of specific touch event
-     * @return true if the touch event that specified with this touch id be a touch-down event
+     * @return true if the touch event that specified with this touch id be a touches
+     * the screen in touch-down and touch-move events. false if the type of touch event
+     * that specified with this touch id is touch=up
      */
-    boolean isTouchDown(int touchId);
+    boolean isScreenTouchedByThisTouchId(int touchId);
 
     /**
      * @param touchId the id of specific touch event
      * @return the point of the touch event specified with this touch id
      */
-    Point getTouchX(int touchId);
+    Point getTouchPoint(int touchId);
 
     /**
      * @return a list of touch events in the buffer
