@@ -16,6 +16,7 @@ import java.io.IOException;
 public class AndroidMusic implements Music, OnCompletionListener, OnSeekCompleteListener, OnPreparedListener, OnVideoSizeChangedListener {
 
     private MediaPlayer mediaPlayer;
+
     private boolean isPrepared;
 
     public AndroidMusic(@NonNull AssetFileDescriptor assetDescriptor) {
