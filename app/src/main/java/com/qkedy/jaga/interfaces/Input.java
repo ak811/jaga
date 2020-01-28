@@ -29,7 +29,7 @@ public interface Input extends TouchHandler {
         /**
          * @apiNote when simultaneous touches occur, each touch will specify with an id, respectively.
          */
-        private int touchId;
+        private int pointerId;
 
         /**
          * @return the type of the touch event
@@ -63,18 +63,18 @@ public interface Input extends TouchHandler {
         }
 
         /**
-         * @return the touchId of the touch event
+         * @return the pointerId of the touch event
          */
-        public int getTouchId() {
-            return touchId;
+        public int getPointerId() {
+            return pointerId;
         }
 
         /**
-         * @param touchId the touch id of the touch event
+         * @param pointerId the touch id of the touch event
          * @apiNote sets the touch id of the touch event
          */
-        public void setTouchId(int touchId) {
-            this.touchId = touchId;
+        public void setPointerId(int pointerId) {
+            this.pointerId = pointerId;
         }
     }
 }
