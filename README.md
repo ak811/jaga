@@ -6,4 +6,4 @@ a Java Game Development Framework
 
 
 
-The project is still under development and is not usable.
+The documentations will be provided soon.
