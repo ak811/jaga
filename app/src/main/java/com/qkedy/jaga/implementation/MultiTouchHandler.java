@@ -95,9 +95,9 @@ public class MultiTouchHandler implements TouchHandler {
     }
 
     @Override
-    public boolean isScreenTouchedByThisTouchId(int touchId) {
+    public boolean isScreenTouchedByThisTouchId(int pointerId) {
         synchronized (this) {
-            int index = getIndex(touchId);
+            int index = getIndex(pointerId);
             if (index < 0 || index >= MAX_TOUCH_POINTS)
                 return false;
             else
@@ -106,9 +106,9 @@ public class MultiTouchHandler implements TouchHandler {
     }
 
     @Override
-    public Point getTouchPoint(int touchId) {
+    public Point getTouchPoint(int pointerId) {
         synchronized (this) {
-            int index = getIndex(touchId);
+            int index = getIndex(pointerId);
             if (index < 0 || index >= MAX_TOUCH_POINTS)
                 return null;
             else

@@ -67,14 +67,14 @@ public class SingleTouchHandler implements TouchHandler {
     }
 
     @Override
-    public boolean isScreenTouchedByThisTouchId(int touchId) {
+    public boolean isScreenTouchedByThisTouchId(int pointerId) {
         synchronized (this) {
-            return touchId == 0 && isTouched;
+            return pointerId == 0 && isTouched;
         }
     }
 
     @Override
-    public Point getTouchPoint(int touchId) {
+    public Point getTouchPoint(int pointerId) {
         return point;
     }
 
