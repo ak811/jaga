@@ -1,7 +1,7 @@
 # jaga
 pronounced as " jäʹ-gə "
 
-a Java Game Development Framework
+an Android Game Development Framework
 
 
 
