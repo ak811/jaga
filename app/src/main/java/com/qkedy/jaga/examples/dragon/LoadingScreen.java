@@ -2,6 +2,7 @@ package com.qkedy.jaga.examples.dragon;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.PorterDuff;
 
 import com.qkedy.jaga.interfaces.Game;
 import com.qkedy.jaga.interfaces.Graphics;
@@ -59,7 +60,7 @@ public class LoadingScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        g.drawImage(Assets.splash, 0, 0);
+        g.drawImage(Assets.splash, 0, 0, 255, false, null, PorterDuff.Mode.ADD);
     }
 
     @Override
