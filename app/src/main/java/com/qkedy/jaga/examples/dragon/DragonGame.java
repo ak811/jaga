@@ -2,6 +2,7 @@ package com.qkedy.jaga.examples.dragon;
 
 import android.util.Log;
 
+import com.qkedy.jaga.R;
 import com.qkedy.jaga.implementation.AndroidGame;
 import com.qkedy.jaga.interfaces.Screen;
 
@@ -23,11 +24,11 @@ public class DragonGame extends AndroidGame {
             Assets.load(this);
             firstTimeCreate = false;
         }
-//        InputStream lvl_1 = getResources().openRawResource(R.raw.map1);
-//        map_1 = convertStreamToString(lvl_1);
-//        InputStream lvl_2 = getResources().openRawResource(R.raw.map2);
-//        map_2 = convertStreamToString(lvl_2);
-//        return new SplashLoadingScreen(this);
+        InputStream lvl_1 = getResources().openRawResource(R.raw.map1);
+        map_1 = convertStreamToString(lvl_1);
+        InputStream lvl_2 = getResources().openRawResource(R.raw.map2);
+        map_2 = convertStreamToString(lvl_2);
+        return new SplashLoadingScreen(this);
         return null;
     }
 
