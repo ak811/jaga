@@ -2,7 +2,6 @@ package com.qkedy.jaga.examples.dragon;
 
 import android.util.Log;
 
-import com.qkedy.jaga.R;
 import com.qkedy.jaga.implementation.AndroidGame;
 import com.qkedy.jaga.interfaces.Screen;
 
