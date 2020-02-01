@@ -1,5 +1,6 @@
-package com.qkedy.jaga.examples.dragon;
+package com.qkedy.jaga.examples.dragon.utils;
 
+import com.qkedy.jaga.examples.dragon.screens.DragonGame;
 import com.qkedy.jaga.interfaces.Image;
 import com.qkedy.jaga.interfaces.Music;
 import com.qkedy.jaga.interfaces.Sound;

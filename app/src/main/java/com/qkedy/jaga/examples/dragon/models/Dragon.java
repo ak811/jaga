@@ -1,7 +1,8 @@
-package com.qkedy.jaga.examples.dragon;
+package com.qkedy.jaga.examples.dragon.models;
 
 import android.graphics.Rect;
 
+import com.qkedy.jaga.examples.dragon.utils.Assets;
 import com.qkedy.jaga.models.Background;
 
 import java.util.ArrayList;

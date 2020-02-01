@@ -1,4 +1,4 @@
-package com.qkedy.jaga.examples.dragon;
+package com.qkedy.jaga.examples.dragon.models;
 
 import android.graphics.Rect;
 
