@@ -11,8 +11,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
-public class DragonGame extends AndroidGame {
+public class MainActivity extends AndroidGame {
 
     // Constants are Here
     public static String map_1;
@@ -25,10 +26,10 @@ public class DragonGame extends AndroidGame {
             Assets.load(this);
             firstTimeCreate = false;
         }
-//        InputStream lvl_1 = getResources().openRawResource(R.raw.map1);
-//        map_1 = convertStreamToString(lvl_1);
-//        InputStream lvl_2 = getResources().openRawResource(R.raw.map2);
-//        map_2 = convertStreamToString(lvl_2);
+        InputStream lvl_1 = getResources().openRawResource(R.raw.map1);
+        map_1 = convertStreamToString(lvl_1);
+        InputStream lvl_2 = getResources().openRawResource(R.raw.map2);
+        map_2 = convertStreamToString(lvl_2);
         return new SplashLoadingScreen(this);
     }
 
@@ -49,12 +50,12 @@ public class DragonGame extends AndroidGame {
                 sb.append(line).append("\n");
             }
         } catch (IOException e) {
-            Log.w("LOG", e.getMessage());
+            Log.w("LOG", Objects.requireNonNull(e.getMessage()));
         } finally {
             try {
                 is.close();
             } catch (IOException e) {
-                Log.w("LOG", e.getMessage());
+                Log.w("LOG", Objects.requireNonNull(e.getMessage()));
             }
         }
         return sb.toString();
