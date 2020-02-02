@@ -2,8 +2,8 @@ package com.qkedy.jaga.examples.dragon.models;
 
 import android.graphics.Rect;
 
+import com.qkedy.jaga.examples.dragon.screens.GameScreen;
 import com.qkedy.jaga.examples.dragon.utils.Assets;
-import com.qkedy.jaga.models.Background;
 
 import java.util.ArrayList;
 
@@ -34,15 +34,15 @@ public class Dragon {
     public static Rect footLeft = new Rect(0, 0, 0, 0);
     public static Rect footRight = new Rect(0, 0, 0, 0);
 
-//    private Background background = GameScreen.getBackground();
+    private Background background = GameScreen.getBackground();
 
-//    private ArrayList<Fireball> fireballs = new ArrayList<Fireball>();
+    private ArrayList<Fireball> fireballs = new ArrayList<Fireball>();
 
     public void update(float deltaTime) {
 
         // Moves Character or Scrolls Background accordingly.
         if (speedX == 0) {
-//            background.setSpeedX(0);
+            background.setSpeedX(0);
         } else if (centerX <= 800 && centerX >= 300) {
             centerX += speedX;
         } else if (speedX < 0 && centerX > 800) {
@@ -50,9 +50,9 @@ public class Dragon {
         } else if (speedX > 0 && centerX < 300) {
             centerX += speedX;
         } else if (speedX > 0 && centerX > 800) {
-//            background.setSpeedX((int) (-MOVESPEED / 5));
+            background.setSpeedX((int) (-MOVESPEED / 5));
         } else if (speedX < 0 && centerX < 300) {
-//            background.setSpeedX((int) (MOVESPEED / 5));
+            background.setSpeedX((int) (MOVESPEED / 5));
         }
 
         // Updates Y Position
@@ -75,14 +75,14 @@ public class Dragon {
 
     public void moveRight() {
         roted = false;
-        if (ducked == false) {
+        if (!ducked) {
             speedX = MOVESPEED;
         }
     }
 
     public void moveLeft() {
         roted = true;
-        if (ducked == false) {
+        if (!ducked) {
             speedX = -MOVESPEED;
         }
     }
@@ -100,21 +100,21 @@ public class Dragon {
     }
 
     private void stop() {
-        if (isMovingRight() == false && isMovingLeft() == false) {
+        if (!isMovingRight() && !isMovingLeft()) {
             speedX = 0;
         }
-        if (isMovingRight() == false && isMovingLeft() == true) {
+        if (!isMovingRight() && isMovingLeft()) {
             moveLeft();
             roted = true;
         }
-        if (isMovingRight() == true && isMovingLeft() == false) {
+        if (isMovingRight() && !isMovingLeft()) {
             moveRight();
             roted = false;
         }
     }
 
     public void jump() {
-        if (jumped == false) {
+        if (!jumped) {
             speedY = JUMPSPEED;
             jumped = true;
             Assets.jump.play(1f);
@@ -129,22 +129,22 @@ public class Dragon {
     public void shoot() {
         if (isRoted()) {
             if (readyToFire && !isDucked()) {
-//                Fireball p = new Fireball(centerX - 80, centerY - 40);
-//                fireballs.add(p);
+                Fireball p = new Fireball(centerX - 80, centerY - 40);
+                fireballs.add(p);
                 Assets.shoot.play(0.85f);
             } else {
-//                Fireball p = new Fireball(centerX - 80, centerY + 60);
-//                fireballs.add(p);
+                Fireball p = new Fireball(centerX - 80, centerY + 60);
+                fireballs.add(p);
                 Assets.shoot.play(0.85f);
             }
         } else {
             if (readyToFire && !isDucked()) {
-//                Fireball p = new Fireball(centerX + 80, centerY - 40);
-//                fireballs.add(p);
+                Fireball p = new Fireball(centerX + 80, centerY - 40);
+                fireballs.add(p);
                 Assets.shoot.play(0.85f);
             } else {
-//                Fireball p = new Fireball(centerX + 80, centerY + 60);
-//                fireballs.add(p);
+                Fireball p = new Fireball(centerX + 80, centerY + 60);
+                fireballs.add(p);
                 Assets.shoot.play(0.85f);
             }
         }
@@ -214,9 +214,9 @@ public class Dragon {
         this.movingLeft = movingLeft;
     }
 
-//    public ArrayList<Fireball> getFireballs() {
-//        return fireballs;
-//    }
+    public ArrayList<Fireball> getFireballs() {
+        return fireballs;
+    }
 
     public boolean isReadyToFire() {
         return readyToFire;
