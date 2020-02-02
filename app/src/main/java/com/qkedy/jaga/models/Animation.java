@@ -33,7 +33,7 @@ public class Animation {
         frames.add(new AnimFrame(image, totalDuration));
     }
 
-    public synchronized void update(long elapsedTime) {
+    public synchronized void update(long elapsedTime, float deltaTime) {
         if (frames.size() > 1) {
             animTime += elapsedTime;
             if (animTime >= totalDuration) {

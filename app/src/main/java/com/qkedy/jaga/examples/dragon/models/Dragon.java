@@ -50,9 +50,9 @@ public class Dragon {
         } else if (speedX > 0 && centerX < 300) {
             centerX += speedX;
         } else if (speedX > 0 && centerX > 800) {
-            background.setSpeedX((int) (-MOVESPEED / 5));
+            background.setSpeedX((-MOVESPEED / 5));
         } else if (speedX < 0 && centerX < 300) {
-            background.setSpeedX((int) (MOVESPEED / 5));
+            background.setSpeedX((MOVESPEED / 5));
         }
 
         // Updates Y Position

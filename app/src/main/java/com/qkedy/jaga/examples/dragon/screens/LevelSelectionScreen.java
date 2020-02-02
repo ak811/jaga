@@ -11,6 +11,8 @@ import com.qkedy.jaga.models.Point;
 
 import java.util.List;
 
+import static com.qkedy.jaga.examples.dragon.utils.Utils.inBounds;
+
 public class LevelSelectionScreen extends Screen {
 
     private Paint textStyle2;
@@ -34,22 +36,12 @@ public class LevelSelectionScreen extends Screen {
             Input.TouchEvent event = touchEvents.get(i);
             if (event.getType() == Input.TouchEvent.TOUCH_UP) {
                 if (inBounds(event, 760, 360, 440, 150)) {
-//                    game.setScreen(new GameScreen(game, 1));
+                    game.setScreen(new GameScreen(game, 1));
                 } else if (inBounds(event, 760, 560, 440, 150)) {
-//                    game.setScreen(new GameScreen(game, 2));
+                    game.setScreen(new GameScreen(game, 2));
                 }
             }
         }
-    }
-
-    private boolean inBounds(Input.TouchEvent event, int x, int y, int width,
-                             int height) {
-        if (event.getPoint().getX() > x && event.getPoint().getX() < x + width - 1
-                && event.getPoint().getY() > y
-                && event.getPoint().getY() < y + height - 1)
-            return true;
-        else
-            return false;
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.qkedy.jaga.examples.dragon.models;
 
 import android.graphics.Rect;
 
+import com.qkedy.jaga.examples.dragon.screens.GameScreen;
+
 import java.util.ArrayList;
 
 public class Fireball {

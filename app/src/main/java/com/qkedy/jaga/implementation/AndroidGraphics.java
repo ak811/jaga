@@ -21,11 +21,11 @@ import android.os.Build;
 
 import androidx.annotation.Nullable;
 
+import com.qkedy.jaga.interfaces.Graphics;
+import com.qkedy.jaga.interfaces.Image;
 import com.qkedy.jaga.models.Background;
 import com.qkedy.jaga.models.Line;
 import com.qkedy.jaga.models.Point;
-import com.qkedy.jaga.interfaces.Graphics;
-import com.qkedy.jaga.interfaces.Image;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -137,7 +137,7 @@ public class AndroidGraphics implements Graphics {
     @Override
     public void drawPath(Path path, int border, int color, int alpha, boolean isDashed) {
         paint.setColor(color);
-        paint.setStrokeWidth(border*scaleX);
+        paint.setStrokeWidth(border * scaleX);
         paint.setAlpha(alpha);
         paint.setStyle(Style.STROKE);
         paint.setAntiAlias(true);
@@ -153,15 +153,6 @@ public class AndroidGraphics implements Graphics {
     }
 
     @Override
-    public void drawRect(Rect rect, int color, int alpha) {
-        paint.setColor(color);
-        paint.setAlpha(alpha);
-        paint.setStyle(Style.FILL);
-        canvas.drawRect((rect.left) * scaleX, (rect.top) * scaleY,
-                (rect.right) * scaleX, (rect.bottom) * scaleY, paint);
-    }
-
-    @Override
     public void drawRect(float x, float y, float width, float height, int color, int alpha) {
         paint.setColor(color);
         paint.setAlpha(alpha);
@@ -169,6 +160,16 @@ public class AndroidGraphics implements Graphics {
         paint.setAntiAlias(true);
         canvas.drawRect(x * scaleX, y * scaleY,
                 (x + width) * scaleX, (y + height) * scaleY, paint);
+    }
+
+    @Override
+    public void drawRect(Rect rect, int color, int alpha) {
+        paint.setColor(color);
+        paint.setAlpha(alpha);
+        paint.setStyle(Style.FILL);
+        paint.setAntiAlias(true);
+        canvas.drawRect(rect.left * scaleX, rect.top * scaleY,
+                rect.right * scaleX, rect.bottom * scaleY, paint);
     }
 
     @Override
@@ -225,7 +226,7 @@ public class AndroidGraphics implements Graphics {
                                     int radius, int border, int color, int alpha) {
         paint.setColor(color);
         paint.setAlpha(alpha);
-        paint.setStrokeWidth(border*scaleX);
+        paint.setStrokeWidth(border * scaleX);
         paint.setStyle(Style.STROKE);
         paint.setAntiAlias(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -241,7 +242,7 @@ public class AndroidGraphics implements Graphics {
                                     int radius, int border, int color, int alpha) {
         paint.setColor(color);
         paint.setAlpha(alpha);
-        paint.setStrokeWidth(border*scaleX);
+        paint.setStrokeWidth(border * scaleX);
         paint.setStyle(Style.STROKE);
         paint.setAntiAlias(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -276,7 +277,7 @@ public class AndroidGraphics implements Graphics {
     public void drawHollowCircle(float x, float y, int radius, int border, int color, int alpha) {
         paint.setColor(color);
         paint.setAlpha(alpha);
-        paint.setStrokeWidth(border*scaleX);
+        paint.setStrokeWidth(border * scaleX);
         paint.setStyle(Style.STROKE);
         paint.setAntiAlias(true);
         canvas.drawCircle(x * scaleX,
@@ -287,7 +288,7 @@ public class AndroidGraphics implements Graphics {
     public void drawHollowCircle(Point coordinate, int radius, int border, int color, int alpha) {
         paint.setColor(color);
         paint.setAlpha(alpha);
-        paint.setStrokeWidth(border*scaleX);
+        paint.setStrokeWidth(border * scaleX);
         paint.setStyle(Style.STROKE);
         paint.setAntiAlias(true);
         canvas.drawCircle(coordinate.getX() * scaleX,
@@ -298,7 +299,7 @@ public class AndroidGraphics implements Graphics {
     public void drawLine(float x1, float y1, float x2, float y2, int border, int color, int alpha) {
         paint.setColor(color);
         paint.setAlpha(alpha);
-        paint.setStrokeWidth(border*scaleX);
+        paint.setStrokeWidth(border * scaleX);
         canvas.drawLine(x1 * scaleX, y1 * scaleY,
                 x2 * scaleX, y2 * scaleY, paint);
     }
@@ -307,7 +308,7 @@ public class AndroidGraphics implements Graphics {
     public void drawLine(Point p1, Point p2, int border, int color, int alpha) {
         paint.setColor(color);
         paint.setAlpha(alpha);
-        paint.setStrokeWidth(border*scaleX);
+        paint.setStrokeWidth(border * scaleX);
         canvas.drawLine(p1.getX() * scaleX, p1.getY() * scaleY,
                 p2.getX() * scaleX, p2.getY() * scaleY, paint);
     }

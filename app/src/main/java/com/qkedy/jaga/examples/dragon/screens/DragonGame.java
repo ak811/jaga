@@ -2,6 +2,7 @@ package com.qkedy.jaga.examples.dragon.screens;
 
 import android.util.Log;
 
+import com.qkedy.jaga.R;
 import com.qkedy.jaga.examples.dragon.utils.Assets;
 import com.qkedy.jaga.implementation.AndroidGame;
 import com.qkedy.jaga.interfaces.Screen;
@@ -28,8 +29,7 @@ public class DragonGame extends AndroidGame {
 //        map_1 = convertStreamToString(lvl_1);
 //        InputStream lvl_2 = getResources().openRawResource(R.raw.map2);
 //        map_2 = convertStreamToString(lvl_2);
-//        return new SplashLoadingScreen(this);
-        return null;
+        return new SplashLoadingScreen(this);
     }
 
     //handles the actions designated to happen when the user presses the back key
@@ -43,10 +43,10 @@ public class DragonGame extends AndroidGame {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
             while ((line = reader.readLine()) != null) {
-                sb.append((line + "\n"));
+                sb.append(line).append("\n");
             }
         } catch (IOException e) {
             Log.w("LOG", e.getMessage());
