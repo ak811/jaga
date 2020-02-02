@@ -10,6 +10,8 @@ import com.qkedy.jaga.interfaces.Screen;
 
 import java.util.List;
 
+import static com.qkedy.jaga.examples.dragon.utils.Utils.inBounds;
+
 // the first line extends the screen variable and then begins the game process
 public class MainMenuScreen extends Screen {
     public MainMenuScreen(Game game) {
@@ -31,17 +33,6 @@ public class MainMenuScreen extends Screen {
                 }
             }
         }
-    }
-
-    // if the touch input is in the bounds of the designated area then it will be registered.
-    private boolean inBounds(Input.TouchEvent event, int x, int y, int width,
-                             int height) {
-        if (event.getPoint().getX() > x && event.getPoint().getX() < x + width - 1
-                && event.getPoint().getY() > y
-                && event.getPoint().getY() < y + height - 1)
-            return true;
-        else
-            return false;
     }
 
     @Override

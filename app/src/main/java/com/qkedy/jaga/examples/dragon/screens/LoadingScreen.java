@@ -10,6 +10,7 @@ import com.qkedy.jaga.interfaces.Graphics;
 import com.qkedy.jaga.interfaces.Screen;
 
 public class LoadingScreen extends Screen {
+
     public LoadingScreen(Game game) {
         super(game);
     }
