@@ -45,10 +45,10 @@ public class GameScreen extends Screen {
 
     private Animation dragonAnim_l, dragonRunAnim_l;
 
-    public static ArrayList<Tile> tileArray = new ArrayList<Tile>();
+    private static ArrayList<Tile> tileArray = new ArrayList<>();
 
-    int livesLeft = 1;
-    Paint textStyle, textStyle2, textStyle3;
+    private int livesLeft = 1;
+    private Paint textStyle, textStyle2, textStyle3;
 
     private Scanner scanner;
 
@@ -117,10 +117,10 @@ public class GameScreen extends Screen {
 
         switch (lvl) {
             case 1:
-                scanner = new Scanner(DragonGame.map_1);
+                scanner = new Scanner(MainActivity.map_1);
                 break;
             case 2:
-                scanner = new Scanner(DragonGame.map_2);
+                scanner = new Scanner(MainActivity.map_2);
                 break;
         }
 
@@ -343,7 +343,7 @@ public class GameScreen extends Screen {
 
     private void updateTiles(float deltaTime) {
         for (int i = 0; i < tileArray.size(); i++) {
-            Tile t = (Tile) tileArray.get(i);
+            Tile t = tileArray.get(i);
             t.update(deltaTime);
         }
     }
@@ -415,7 +415,7 @@ public class GameScreen extends Screen {
         }
     }
 
-    public void animate(float deltaTime) {
+    private void animate(float deltaTime) {
         dragonAnim_r.update(10, deltaTime);
         dragonRunAnim_r.update(10, deltaTime);
         dragonAnim_l.update(10, deltaTime);

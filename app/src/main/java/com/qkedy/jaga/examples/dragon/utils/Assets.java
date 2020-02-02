@@ -1,6 +1,6 @@
 package com.qkedy.jaga.examples.dragon.utils;
 
-import com.qkedy.jaga.examples.dragon.screens.DragonGame;
+import com.qkedy.jaga.examples.dragon.screens.MainActivity;
 import com.qkedy.jaga.interfaces.Image;
 import com.qkedy.jaga.interfaces.Music;
 import com.qkedy.jaga.interfaces.Sound;
@@ -27,8 +27,8 @@ public class Assets {
 
     public static Music music;
 
-    public static void load(DragonGame dragonGame) {
-        music = dragonGame.getAudio().createMusic("game_music.mp3");
+    public static void load(MainActivity mainActivity) {
+        music = mainActivity.getAudio().createMusic("game_music.mp3");
         music.setLooping(true);
         music.setVolume(0.85f);
         music.play();
