@@ -34,9 +34,9 @@ public class LevelSelectionScreen extends Screen {
             Input.TouchEvent event = touchEvents.get(i);
             if (event.getType() == Input.TouchEvent.TOUCH_UP) {
                 if (inBounds(event, 760, 360, 440, 150)) {
-                    game.setScreen(new GameScreen(game, 1));
+//                    game.setScreen(new GameScreen(game, 1));
                 } else if (inBounds(event, 760, 560, 440, 150)) {
-                    game.setScreen(new GameScreen(game, 2));
+//                    game.setScreen(new GameScreen(game, 2));
                 }
             }
         }
