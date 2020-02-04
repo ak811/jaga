@@ -1,6 +1,7 @@
 package com.qkedy.jaga.examples.dragon.screens;
 
 import android.graphics.PorterDuff;
+import android.util.Log;
 
 import com.qkedy.jaga.examples.dragon.utils.Assets;
 import com.qkedy.jaga.interfaces.Game;
@@ -12,17 +13,17 @@ import java.util.List;
 
 import static com.qkedy.jaga.examples.dragon.utils.Utils.inBounds;
 
-// the first line extends the screen variable and then begins the game process
 public class MainMenuScreen extends Screen {
+
+    private final String TAG = MainMenuScreen.class.getSimpleName();
+
     public MainMenuScreen(Game game) {
         super(game);
     }
 
-
-    // this block of code handles the events associated with the user touching the screen.
     @Override
     public void update(float deltaTime) {
-        Graphics g = game.getGraphics();
+        Log.w(TAG, "update");
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {

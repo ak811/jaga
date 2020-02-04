@@ -8,40 +8,38 @@ import java.util.ArrayList;
 
 public class Enemy {
 
-    // Constants are Here
     private int power, centerX, speedX, centerY;
     private int fire_timer = 30;
     private Background bg = GameScreen.getBackground();
     private Dragon dragon = GameScreen.getDragon();
 
-    public Rect enemy = new Rect(0, 0, 0, 0);
-    public int health = 5;
+    private Rect rect = new Rect(0, 0, 0, 0);
+    private int health = 5;
 
     private int movementSpeed;
 
-    private ArrayList<EnemyFire> fire = new ArrayList<>();
+    private ArrayList<EnemyFire> fires = new ArrayList<>();
 
-    // Create Enemy
     public Enemy(int centerX, int centerY) {
         setCenterX(centerX);
         setCenterY(centerY);
     }
 
-    // Behavioral Methods
     public void update(float deltaTime) {
         follow();
+
         centerX += speedX;
         speedX = bg.getSpeedX() * 5 + movementSpeed;
-        enemy.set(centerX - 55, centerY - 20, centerX + 125, centerY + 130);
+        rect.set(centerX - 55, centerY - 20, centerX + 125, centerY + 130);
 
         fire_timer--;
 
-        if (Rect.intersects(enemy, Dragon.body)) {
+        if (Rect.intersects(rect, Dragon.body)) {
             checkCollision();
         }
 
         for (int t = 0; t < GameScreen.getTile().size(); t++)
-            if ((Rect.intersects(enemy, GameScreen.getTile().get(t).getTileRect()))
+            if ((Rect.intersects(rect, GameScreen.getTile().get(t).getTileRect()))
                     && (GameScreen.getTile().get(t).getTileType() != 0)) {
                 centerY -= 5;
             }
@@ -74,7 +72,7 @@ public class Enemy {
 
     public void attack() {
         EnemyFire p = new EnemyFire(centerX - 52, centerY + 52);
-        fire.add(p);
+        fires.add(p);
     }
 
     public int getPower() {
@@ -117,8 +115,23 @@ public class Enemy {
         this.bg = bg;
     }
 
-    public ArrayList<EnemyFire> getFire() {
-        return fire;
+    public ArrayList<EnemyFire> getFires() {
+        return fires;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public Rect getRect() {
+        return rect;
+    }
+
+    public void setRect(Rect rect) {
+        this.rect = rect;
+    }
 }

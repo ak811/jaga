@@ -72,16 +72,20 @@ public interface Graphics {
 
     void drawShadowString(String text, Point coordinate, Paint paint, int shadowColor, int alpha);
 
-    void drawImage(Image Image, float x, float y, int alpha, boolean isPushed,
+    void drawImage(Image image, float x, float y);
+
+    void drawImage(Image image, float x, float y, int alpha);
+
+    void drawImage(Image image, float x, float y, int alpha, boolean isPushed,
                    @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
     void drawImage(Image image, Point coordinate, int alpha, boolean isPushed,
                    @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledImage(Image Image, float x, float y, int width, int height,
+    void drawScaledImage(Image image, float x, float y, int width, int height,
                          int alpha, boolean isPushed, @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledImage(Image Image, Point coordinate, int width, int height,
+    void drawScaledImage(Image image, Point coordinate, int width, int height,
                          int alpha, boolean isPushed, @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
     void drawRotateImage(Image image, float x, float y, float degree, int alpha,
@@ -90,11 +94,11 @@ public interface Graphics {
     void drawRotateImage(Image image, Point coordinate, float degree, int alpha,
                          boolean isPushed, @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledRotatedImage(Image Image, float x, float y, int width, int height,
+    void drawScaledRotatedImage(Image image, float x, float y, int width, int height,
                                 float degree, int alpha, boolean isPushed,
                                 @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledRotatedImage(Image Image, Point coordinate, int width, int height,
+    void drawScaledRotatedImage(Image image, Point coordinate, int width, int height,
                                 float degree, int alpha, boolean isPushed,
                                 @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
@@ -106,11 +110,11 @@ public interface Graphics {
                           int srcHeight, int alpha, boolean isPushed,
                           @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledCroppedImage(Image Image, float x, float y, int width, int height, int srcX, int srcY,
+    void drawScaledCroppedImage(Image image, float x, float y, int width, int height, int srcX, int srcY,
                                 int srcWidth, int srcHeight, int alpha, boolean isPushed,
                                 @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledCroppedImage(Image Image, Point coordinate, int width, int height, int srcX, int srcY,
+    void drawScaledCroppedImage(Image image, Point coordinate, int width, int height, int srcX, int srcY,
                                 int srcWidth, int srcHeight, int alpha, boolean isPushed,
                                 @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
@@ -122,15 +126,15 @@ public interface Graphics {
                                 float degree, int alpha, boolean isPushed,
                                 @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledRotateCroppedImage(Image Image, float x, float y, int width, int height, int srcX, int srcY,
+    void drawScaledRotateCroppedImage(Image image, float x, float y, int width, int height, int srcX, int srcY,
                                       int srcWidth, int srcHeight, float degree, int alpha, boolean isPushed,
                                       @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledRotateCroppedImage(Image Image, Point coordinate, int width, int height, int srcX, int srcY,
+    void drawScaledRotateCroppedImage(Image image, Point coordinate, int width, int height, int srcX, int srcY,
                                       int srcWidth, int srcHeight, float degree, int alpha, boolean isPushed,
                                       @Nullable String color, @Nullable PorterDuff.Mode cMode);
 
-    void drawScaledImageWithShadow(Image Image, float desX, float desY, float width, float height, int shadowOffsetX, int shadowOffsetY);
+    void drawScaledImageWithShadow(Image image, float desX, float desY, float width, float height, int shadowOffsetX, int shadowOffsetY);
 
     int getWidth();
 

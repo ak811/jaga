@@ -12,8 +12,11 @@ public class Background {
 
     public void update(float deltaTime) {
         bgX += speedX;
-        if (bgX <= -5760) {            //if background get end. will restore.
-            bgX += 11520;
+
+        //if background ended, will restore.
+        int backgroundWidth = 5760;
+        if (bgX <= -backgroundWidth) {
+            bgX += backgroundWidth * 2;
         }
     }
 

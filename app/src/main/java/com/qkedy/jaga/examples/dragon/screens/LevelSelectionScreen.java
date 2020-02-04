@@ -2,6 +2,7 @@ package com.qkedy.jaga.examples.dragon.screens;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.qkedy.jaga.interfaces.Game;
 import com.qkedy.jaga.interfaces.Graphics;
@@ -15,6 +16,8 @@ import static com.qkedy.jaga.examples.dragon.utils.Utils.inBounds;
 
 public class LevelSelectionScreen extends Screen {
 
+    private final String TAG = LevelSelectionScreen.class.getSimpleName();
+
     private Paint textStyle2;
 
     public LevelSelectionScreen(Game game) {
@@ -26,10 +29,9 @@ public class LevelSelectionScreen extends Screen {
         textStyle2.setColor(Color.WHITE);
     }
 
-
     @Override
     public void update(float deltaTime) {
-        Graphics g = game.getGraphics();
+        Log.w(TAG, "update");
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {

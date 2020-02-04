@@ -9,9 +9,8 @@ import java.util.ArrayList;
 
 public class Dragon {
 
-    // Constants are Here
-    final int JUMPSPEED = -30;
-    final int MOVESPEED = 30;
+    private final int JUMP_SPEED = -30;
+    private final int MOVE_SPEED = 30;
 
     public int health = 25;
 
@@ -36,7 +35,7 @@ public class Dragon {
 
     private Background background = GameScreen.getBackground();
 
-    private ArrayList<Fireball> fireballs = new ArrayList<Fireball>();
+    private ArrayList<Fireball> fireballs = new ArrayList<>();
 
     public void update(float deltaTime) {
 
@@ -50,9 +49,9 @@ public class Dragon {
         } else if (speedX > 0 && centerX < 300) {
             centerX += speedX;
         } else if (speedX > 0 && centerX > 800) {
-            background.setSpeedX((-MOVESPEED / 5));
+            background.setSpeedX((-MOVE_SPEED / 5));
         } else if (speedX < 0 && centerX < 300) {
-            background.setSpeedX((MOVESPEED / 5));
+            background.setSpeedX((MOVE_SPEED / 5));
         }
 
         // Updates Y Position
@@ -64,7 +63,7 @@ public class Dragon {
             jumped = true;
         }
 
-        // Dragon Body Parts
+        // updated Dragon's Body parts
         verticalBodyLine.set(centerX - 10, centerY - 60, centerX + 30, centerY + 130);
         body.set(centerX - 55, centerY - 60, centerX + 125, centerY + 130);
         bodyLeft.set(centerX - 55, verticalBodyLine.top + 60, centerX - 25, verticalBodyLine.bottom - 60);
@@ -75,16 +74,14 @@ public class Dragon {
 
     public void moveRight() {
         roted = false;
-        if (!ducked) {
-            speedX = MOVESPEED;
-        }
+        if (!ducked)
+            speedX = MOVE_SPEED;
     }
 
     public void moveLeft() {
         roted = true;
-        if (!ducked) {
-            speedX = -MOVESPEED;
-        }
+        if (!ducked)
+            speedX = -MOVE_SPEED;
     }
 
     public void stopRight() {
@@ -115,7 +112,7 @@ public class Dragon {
 
     public void jump() {
         if (!jumped) {
-            speedY = JUMPSPEED;
+            speedY = JUMP_SPEED;
             jumped = true;
             Assets.jump.play(1f);
         }
