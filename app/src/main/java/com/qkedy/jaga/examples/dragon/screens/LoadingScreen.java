@@ -3,6 +3,7 @@ package com.qkedy.jaga.examples.dragon.screens;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.PorterDuff;
+import android.util.Log;
 
 import com.qkedy.jaga.examples.dragon.utils.Assets;
 import com.qkedy.jaga.interfaces.Game;
@@ -11,12 +12,16 @@ import com.qkedy.jaga.interfaces.Screen;
 
 public class LoadingScreen extends Screen {
 
+    private final String TAG = LoadingScreen.class.getSimpleName();
+
     public LoadingScreen(Game game) {
         super(game);
     }
 
     @Override
     public void update(float deltaTime) {
+        Log.w(TAG, "update");
+
         Graphics g = game.getGraphics();
 
         Assets.menu = g.newImage("menu.png", Config.ARGB_8888);

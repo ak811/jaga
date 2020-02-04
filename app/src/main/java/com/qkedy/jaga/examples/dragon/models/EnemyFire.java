@@ -10,13 +10,12 @@ public class EnemyFire {
     private int x, y, speedX, speedY;
     private boolean visible;
 
-    private Dragon dragon = GameScreen.getDragon();
-
     private Rect fire;
 
     public EnemyFire(int startX, int startY) {
         x = startX;
         y = startY;
+        Dragon dragon = GameScreen.getDragon();
         speedX = (dragon.getCenterX() - x) / 15;
         speedY = (dragon.getCenterY() - y) / 15;
         visible = true;
@@ -38,16 +37,17 @@ public class EnemyFire {
     }
 
     private void checkCollision() {
-        if (Rect.intersects(fire, Dragon.body) && !GameScreen.dragon.isDucked()) {
+        if (Rect.intersects(fire, Dragon.body) && !GameScreen.getDragon().isDucked()) {
             visible = false;
-            if (GameScreen.dragon.health > 0) {
-                GameScreen.dragon.health -= 1;
+            if (GameScreen.getDragon().health > 0) {
+                GameScreen.getDragon().health -= 1;
             }
         }
-        for (int t = 0; t < GameScreen.getTile().size(); t++) {
-            if ((Rect.intersects(fire, GameScreen.getTile().get(t).getTileRect())) && (GameScreen.getTile().get(t).getTileType() != 0)) {
-                for (int e = 0; e < GameScreen.enemyList.size(); e++)
-                    GameScreen.enemyList.get(e).getFire().remove(this);
+        for (int i = 0; i < GameScreen.getTile().size(); i++) {
+            if ((Rect.intersects(fire, GameScreen.getTile().get(i).getTileRect()))
+                    && (GameScreen.getTile().get(i).getTileType() != 0)) {
+                for (int j = 0; j < GameScreen.getEnemies().size(); j++)
+                    GameScreen.getEnemies().get(j).getFires().remove(this);
             }
         }
     }

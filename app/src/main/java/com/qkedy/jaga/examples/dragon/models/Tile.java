@@ -9,10 +9,9 @@ import com.qkedy.jaga.interfaces.Image;
 
 public class Tile {
 
-    // Constants are Here
     private int tileX, tileY, speedX;
     public int type;
-    public Image tileImage;
+    private Image tileImage;
 
     private Dragon dragon = GameScreen.getDragon();
     private Background background = GameScreen.getBackground();
@@ -65,7 +64,7 @@ public class Tile {
             dragon.setCenterY(tileY + 120);
         }
         if (Rect.intersects(drag, tile) && type == 9) {
-            GameScreen.state = GameScreen.GameState.Win;
+            GameScreen.state = GameScreen.GameState.WIN;
         }
     }
 

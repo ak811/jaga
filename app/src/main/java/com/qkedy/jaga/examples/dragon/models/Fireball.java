@@ -8,17 +8,17 @@ import java.util.ArrayList;
 
 public class Fireball {
 
-    // Constants are Here
     private int x, y, speedX;
     private boolean visible;
 
     private Rect fireball;
-    private ArrayList<Enemy> enemy = GameScreen.getEnemy();
-    private Dragon dragon = GameScreen.getDragon();
+    private ArrayList<Enemy> enemies = GameScreen.getEnemy();
 
     public Fireball(int startX, int startY) {
         x = startX;
         y = startY;
+
+        Dragon dragon = GameScreen.getDragon();
         if (dragon.isRoted())
             speedX = -25;
         else
@@ -41,21 +41,21 @@ public class Fireball {
     }
 
     private void checkCollision() {
-        for (int e = 0; e < enemy.size(); e++) {
-            if (Rect.intersects(fireball, enemy.get(e).enemy)) {
+        for (int e = 0; e < enemies.size(); e++) {
+            if (Rect.intersects(fireball, enemies.get(e).getRect())) {
                 visible = false;
-                if (enemy.get(e).health > 1) {
-                    enemy.get(e).health -= 1;
+                if (enemies.get(e).getHealth() > 1) {
+                    enemies.get(e).setHealth(enemies.get(e).getHealth() - 1);
                 } else {
-                    enemy.get(e).die();
-                    enemy.remove(e);
+                    enemies.get(e).die();
+                    enemies.remove(e);
                 }
             }
         }
-        for (int t=0; t<GameScreen.getTile().size();t++)
-        if ((Rect.intersects(fireball, GameScreen.getTile().get(t).getTileRect())) && (GameScreen.getTile().get(t).getTileType() != 0)) {
-            GameScreen.dragon.getFireballs().remove(this);
-        }
+        for (int t = 0; t < GameScreen.getTile().size(); t++)
+            if ((Rect.intersects(fireball, GameScreen.getTile().get(t).getTileRect())) && (GameScreen.getTile().get(t).getTileType() != 0)) {
+                GameScreen.getDragon().getFireballs().remove(this);
+            }
     }
 
     public int getX() {

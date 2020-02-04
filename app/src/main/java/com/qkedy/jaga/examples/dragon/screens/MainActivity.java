@@ -15,7 +15,8 @@ import java.util.Objects;
 
 public class MainActivity extends AndroidGame {
 
-    // Constants are Here
+    private final String TAG = MainActivity.class.getSimpleName();
+
     public static String map_1;
     public static String map_2;
     boolean firstTimeCreate = true;
@@ -28,27 +29,25 @@ public class MainActivity extends AndroidGame {
         }
         InputStream lvl_1 = getResources().openRawResource(R.raw.map1);
         map_1 = convertStreamToString(lvl_1);
+        Log.w(TAG, "hello");
         InputStream lvl_2 = getResources().openRawResource(R.raw.map2);
         map_2 = convertStreamToString(lvl_2);
         return new SplashLoadingScreen(this);
     }
 
-    //handles the actions designated to happen when the user presses the back key
     @Override
     public void onBackPressed() {
         getCurrentScreen().backButton();
     }
 
     private static String convertStreamToString(InputStream is) {
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
         String line;
         try {
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null)
                 sb.append(line).append("\n");
-            }
         } catch (IOException e) {
             Log.w("LOG", Objects.requireNonNull(e.getMessage()));
         } finally {
@@ -61,14 +60,12 @@ public class MainActivity extends AndroidGame {
         return sb.toString();
     }
 
-    // resumes the program after the user has re-opened it
     @Override
     public void onResume() {
         super.onResume();
         Assets.music.play();
     }
 
-    // handles the actions needed for when the program is minimized
     @Override
     public void onPause() {
         super.onPause();

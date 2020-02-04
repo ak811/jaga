@@ -2,6 +2,7 @@ package com.qkedy.jaga.examples.dragon.screens;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.qkedy.jaga.examples.dragon.models.Background;
 import com.qkedy.jaga.examples.dragon.models.Dragon;
@@ -28,24 +29,24 @@ import static com.qkedy.jaga.examples.dragon.utils.Utils.inBounds;
 
 public class GameScreen extends Screen {
 
-    // Constants are Here
+    private final String TAG = GameScreen.class.getSimpleName();
+
     public enum GameState {
-        Ready, Running, Paused, GameOver, Win
+        READY, RUNNING, PAUSED, GAME_OVER, WIN
     }
 
-    public static GameState state = GameState.Ready;
+    public static GameState state = GameState.READY;
 
     private static Background background;
-    public static Dragon dragon;
-    public static ArrayList<Enemy> enemyList = new ArrayList<>();
+    private static Dragon dragon;
+    private static ArrayList<Enemy> enemies = new ArrayList<>();
 
     private Image currentSprite;
 
     private Animation dragonAnim_r, enemyAnim, dragonRunAnim_r;
-
     private Animation dragonAnim_l, dragonRunAnim_l;
 
-    private static ArrayList<Tile> tileArray = new ArrayList<>();
+    private static ArrayList<Tile> tiles = new ArrayList<>();
 
     private int livesLeft = 1;
     private Paint textStyle, textStyle2, textStyle3;
@@ -55,8 +56,6 @@ public class GameScreen extends Screen {
     public GameScreen(Game game, int lvl) {
         super(game);
 
-        // Initialize game objects here. All objects here will be used in the game.
-        // If you add new assets or characters to the game, be sure to include them in this list
         background = new Background(0, 0);
         dragon = new Dragon();
 
@@ -88,7 +87,6 @@ public class GameScreen extends Screen {
 
         loadMap(lvl);
 
-        // Defining a textStyle object. This lines of code are used in order to project the background.
         textStyle = new Paint();
         textStyle.setTextSize(30);
         textStyle.setTextAlign(Paint.Align.CENTER);
@@ -107,8 +105,6 @@ public class GameScreen extends Screen {
         textStyle3.setAntiAlias(true);
         textStyle3.setColor(Color.WHITE);
     }
-
-    // This section of code defines a method that allows us to load the map_1 that is needed.
 
     private void loadMap(int lvl) {
         ArrayList lines = new ArrayList();
@@ -143,10 +139,10 @@ public class GameScreen extends Screen {
                 if (i < line.length()) {
                     char ch = line.charAt(i);
                     if (Character.getNumericValue(ch) == 1) {
-                        enemyList.add(new Enemy(i * 40, j * 40));
+                        enemies.add(new Enemy(i * 40, j * 40));
                     } else {
                         Tile t = new Tile(i, j, Character.getNumericValue(ch));
-                        tileArray.add(t);
+                        tiles.add(t);
                     }
                 }
             }
@@ -156,43 +152,33 @@ public class GameScreen extends Screen {
 
     @Override
     public void update(float deltaTime) {
+        Log.w(TAG, "update");
+
         List touchEvents = game.getInput().getTouchEvents();
 
-        // We have four separate update methods in this example.
-        // Depending on the state of the game, we call different update methods.
-        // Refer to Unit 3's code. We did a similar thing without separating the
-        // update methods.
-        if (state == GameState.Ready)
+        if (state == GameState.READY)
             updateReady(touchEvents);
-        if (state == GameState.Running)
+        if (state == GameState.RUNNING)
             updateRunning(touchEvents, deltaTime);
-        if (state == GameState.Paused)
+        if (state == GameState.PAUSED)
             updatePaused(touchEvents);
-        if (state == GameState.GameOver)
+        if (state == GameState.GAME_OVER)
             updateGameOver(touchEvents);
-        if (state == GameState.Win)
+        if (state == GameState.WIN)
             updateWin(touchEvents);
     }
 
     private void updateReady(List touchEvents) {
-
-        // This example starts with a "Ready" screen.
-        // When the user touches the screen, the game begins.
-        // state now becomes GameState.Running.
-        // Now the updateRunning() method will be called!
         if (touchEvents.size() > 0)
-            state = GameState.Running;
+            state = GameState.RUNNING;
     }
 
     private void updateRunning(List touchEvents, float deltaTime) {
 
-        // This is identical to the update() method from our Unit 2/3 game.
-        // 1. All touch input is handled here:
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
             Input.TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.getType() == TouchEvent.TOUCH_DOWN) {
-                // This group of code is used to define that are that you want to register the users input.
                 if (inBounds(event, 0, 450, 100, 100)) {
                     dragon.jump();
                     currentSprite = dragonAnim_r.getImage();
@@ -243,12 +229,12 @@ public class GameScreen extends Screen {
         }
 
 
-        // 2. Check miscellaneous events like death:
+        // Check miscellaneous events like death:
         if (livesLeft == 0 || dragon.health == 0 || dragon.getCenterY() > 1090) {
-            state = GameState.GameOver;
+            state = GameState.GAME_OVER;
         }
 
-        // 3. Call individual update() methods here.
+        // Call individual update() methods here.
         // This is where all the game updates happen.
         dragon.update(deltaTime);
         if (dragon.isJumped()) {
@@ -276,8 +262,8 @@ public class GameScreen extends Screen {
             }
         }
 
-        for (int e = 0; e < enemyList.size(); e++) {
-            ArrayList fire = enemyList.get(e).getFire();
+        for (int e = 0; e < enemies.size(); e++) {
+            ArrayList fire = enemies.get(e).getFires();
             for (int i = 0; i < fire.size(); i++) {
                 EnemyFire ef = (EnemyFire) fire.get(i);
                 if (ef.isVisible()) {
@@ -289,8 +275,8 @@ public class GameScreen extends Screen {
         }
 
         updateTiles(deltaTime);
-        for (int e = 0; e < enemyList.size(); e++) {
-            enemyList.get(e).update(deltaTime);
+        for (int e = 0; e < enemies.size(); e++) {
+            enemies.get(e).update(deltaTime);
         }
         background.update(deltaTime);
         animate(deltaTime);
@@ -342,8 +328,8 @@ public class GameScreen extends Screen {
     }
 
     private void updateTiles(float deltaTime) {
-        for (int i = 0; i < tileArray.size(); i++) {
-            Tile t = tileArray.get(i);
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile t = tiles.get(i);
             t.update(deltaTime);
         }
     }
@@ -366,10 +352,9 @@ public class GameScreen extends Screen {
                 g.drawImage(Assets.fireball_r, p.getX(), p.getY(),
                         Constants.MAX_ALPHA, false, null, null);
         }
-        // First draw the game elements.
 
-        for (int e = 0; e < enemyList.size(); e++) {
-            ArrayList fire = enemyList.get(e).getFire();
+        for (int e = 0; e < enemies.size(); e++) {
+            ArrayList fire = enemies.get(e).getFires();
             for (int i = 0; i < fire.size(); i++) {
                 EnemyFire p = (EnemyFire) fire.get(i);
                 g.drawRect(p.getX(), p.getY(), 20, 10, Color.GREEN, Constants.MAX_ALPHA);
@@ -386,28 +371,27 @@ public class GameScreen extends Screen {
         g.drawImage(currentSprite, dragon.getCenterX() - 61,
                 dragon.getCenterY() - 63, Constants.MAX_ALPHA, false, null, null);
 
-        for (int e = 0; e < enemyList.size(); e++) {
-            g.drawImage(enemyAnim.getImage(), enemyList.get(e).getCenterX() - 48,
-                    enemyList.get(e).getCenterY() - 48, Constants.MAX_ALPHA,
+        for (int e = 0; e < enemies.size(); e++) {
+            g.drawImage(enemyAnim.getImage(), enemies.get(e).getCenterX() - 48,
+                    enemies.get(e).getCenterY() - 48, Constants.MAX_ALPHA,
                     false, null, null);
         }
 
-        // Secondly, draw the UI above the game elements.
-        if (state == GameState.Ready)
+        if (state == GameState.READY)
             drawReadyUI();
-        if (state == GameState.Running)
+        if (state == GameState.RUNNING)
             drawRunningUI();
-        if (state == GameState.Paused)
+        if (state == GameState.PAUSED)
             drawPausedUI();
-        if (state == GameState.GameOver)
+        if (state == GameState.GAME_OVER)
             drawGameOverUI();
-        if (state == GameState.Win)
+        if (state == GameState.WIN)
             drawGameWin();
     }
 
     private void paintTiles(Graphics g) {
-        for (int i = 0; i < tileArray.size(); i++) {
-            Tile t = tileArray.get(i);
+        for (int i = 0; i < tiles.size(); i++) {
+            Tile t = tiles.get(i);
             if (t.type != 0) {
                 g.drawImage(t.getTileImage(), t.getTileX(),
                         t.getTileY(), Constants.MAX_ALPHA, false, null, null);
@@ -424,23 +408,19 @@ public class GameScreen extends Screen {
     }
 
     private void nullify() {
-
-        // Set all variables to null. You will be recreating them in the
-        // constructor.
         textStyle = null;
         background = null;
         dragon = null;
-        enemyList.clear();
+        enemies.clear();
         currentSprite = null;
         dragonAnim_r = null;
         dragonAnim_l = null;
         dragonRunAnim_r = null;
         dragonRunAnim_l = null;
         enemyAnim = null;
-        tileArray.clear();
-        state = GameState.Ready;
+        tiles.clear();
+        state = GameState.READY;
 
-        // Call garbage collector to clean up memory.
         System.gc();
     }
 
@@ -452,11 +432,15 @@ public class GameScreen extends Screen {
 
     private void drawRunningUI() {
         Graphics g = game.getGraphics();
-//        g.drawImage(Assets.button, 0, 450, 0, 0, 100, 100);
-//        g.drawImage(Assets.button, 0, 550, 0, 100, 100, 100);
-//        g.drawImage(Assets.button, 0, 650, 0, 200, 100, 100);
-//        g.drawImage(Assets.button, 0, 0, 0, 300, 50, 50);
-//        g.drawString("Health Left: ", 250, 50, textStyle3);
+        g.drawCroppedImage(Assets.button, 0, 450, 0, 0, 100, 100,
+                Constants.MAX_ALPHA, false, null, null);
+        g.drawCroppedImage(Assets.button, 0, 550, 0, 100, 100, 100,
+                Constants.MAX_ALPHA, false, null, null);
+        g.drawCroppedImage(Assets.button, 0, 650, 0, 200, 100, 100,
+                Constants.MAX_ALPHA, false, null, null);
+        g.drawCroppedImage(Assets.button, 0, 0, 0, 300, 50, 50,
+                Constants.MAX_ALPHA, false, null, null);
+        g.drawString("Health Left: ", 250, 50, textStyle3, Constants.MAX_ALPHA);
         if (livesLeft != 0 && dragon.health != 0) {
             for (int i = 1; i <= dragon.health; i++) {
                 g.drawImage(Assets.heart, 330 + (i * 45),
@@ -467,7 +451,7 @@ public class GameScreen extends Screen {
 
     private void drawPausedUI() {
         Graphics g = game.getGraphics();
-        // Darken the entire screen so you can display the Paused screen.
+        // Darken the entire screen so you can display the PAUSED screen.
         g.drawARGB(125, 0, 0, 0);
         g.drawString("Resume", new Point(980, 540), textStyle2, Constants.MAX_ALPHA);
         g.drawString("Menu", new Point(980, 720), textStyle2, Constants.MAX_ALPHA);
@@ -489,14 +473,14 @@ public class GameScreen extends Screen {
 
     @Override
     public void pause() {
-        if (state == GameState.Running)
-            state = GameState.Paused;
+        if (state == GameState.RUNNING)
+            state = GameState.PAUSED;
     }
 
     @Override
     public void resume() {
-        if (state == GameState.Paused)
-            state = GameState.Running;
+        if (state == GameState.PAUSED)
+            state = GameState.RUNNING;
     }
 
     @Override
@@ -515,28 +499,38 @@ public class GameScreen extends Screen {
     }
 
     private void goToMenu() {
-        // TODO Auto-generated method stub
         game.setScreen(new MainMenuScreen(game));
     }
 
     public static Background getBackground() {
-        // TODO Auto-generated method stub
         return background;
     }
 
     public static Dragon getDragon() {
-        // TODO Auto-generated method stub
         return dragon;
     }
 
     public static ArrayList<Enemy> getEnemy() {
-        // TODO Auto-generated method stub
-        return enemyList;
+        return enemies;
     }
 
     public static ArrayList<Tile> getTile() {
-        // TODO Auto-generated method stub
-        return tileArray;
+        return tiles;
     }
 
+    public static ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public static void setEnemies(ArrayList<Enemy> enemies) {
+        GameScreen.enemies = enemies;
+    }
+
+    public static GameState getState() {
+        return state;
+    }
+
+    public static void setState(GameState state) {
+        GameScreen.state = state;
+    }
 }
