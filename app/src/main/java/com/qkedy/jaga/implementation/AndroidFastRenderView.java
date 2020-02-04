@@ -7,8 +7,10 @@ import android.view.View;
 
 @SuppressLint("ViewConstructor")
 public class AndroidFastRenderView extends View {
-    private AndroidGame game;
 
+    private final String TAG = AndroidFastRenderView.class.getSimpleName();
+
+    private AndroidGame game;
     private int fps;
     private static long fpsStartTime;
     private long startTime;
@@ -20,6 +22,8 @@ public class AndroidFastRenderView extends View {
         fpsStartTime = System.currentTimeMillis();
 
         startTime = System.nanoTime();
+
+        Log.w(TAG, "AndroidFastRenderView");
     }
 
     @Override
@@ -28,19 +32,16 @@ public class AndroidFastRenderView extends View {
 
         AndroidFastRenderView.canvas = canvas;
 
-//        deltaTime is based on the Hundredth of a second (0.01)
+        // deltaTime is based on the hundredth of a second (0.01)
         float deltaTime = (System.nanoTime() - startTime) / 10_000_000f;
         startTime = System.nanoTime();
         if (deltaTime > 3.15)
             deltaTime = 3.15f;
 
-//        Log.e("deltaRime", deltaTime + "");
-//        int deltaTime = 1;
+        Log.w(TAG, "onDraw");
 
         game.getCurrentScreen().update(deltaTime);
         game.getCurrentScreen().paint(deltaTime);
-
-//        calculateFPS();
 
         invalidate();
     }

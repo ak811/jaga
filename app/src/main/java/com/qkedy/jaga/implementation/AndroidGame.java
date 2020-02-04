@@ -3,6 +3,7 @@ package com.qkedy.jaga.implementation;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -23,7 +24,8 @@ import com.qkedy.jaga.utils.Constants;
 import org.json.JSONException;
 
 public abstract class AndroidGame extends Activity implements Game {
-    //    public static AndroidFastRenderView renderView;
+
+    public static AndroidFastRenderView renderView;
     private Graphics graphics;
     public static Audio audio;
     public static Input input;
@@ -36,7 +38,7 @@ public abstract class AndroidGame extends Activity implements Game {
     public static float scaleX;
     public static float scaleY;
 
-//    public static AssetManager assetManager;
+    public static AssetManager assetManager;
 
     @SuppressLint("InvalidWakeLockTag")
     @Override
@@ -62,21 +64,21 @@ public abstract class AndroidGame extends Activity implements Game {
         scaleX = deviceScreenWidth / (float) bitmapWidth;
         scaleY = deviceScreenHeight / (float) bitmapHeight;
 
-//        renderView = new AndroidFastRenderView(this);
+        renderView = new AndroidFastRenderView(this);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-//        renderView.setLayerType(View.LAYER_TYPE_HARDWARE, paint);
-//        graphics = new AndroidGraphics(getAssets(), bitmap);
+        renderView.setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+        graphics = new AndroidGraphics(getAssets(), bitmap);
         fileIO = new AndroidFileIO(this);
         audio = new AndroidAudio(this);
-//        input = new AndroidInput(this, renderView, touchScaleX, touchScaleY);
+        input = new AndroidInput(this, renderView, touchScaleX, touchScaleY);
         try {
             screen = getInitScreen();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-//        setContentView(renderView);
+        setContentView(renderView);
 
-        /* @apiNote for controlling power management,
+        /** @apiNote for controlling power management,
          * including "wake locks," which let you keep the device on, while
          * you're RUNNING long tasks.
          */
@@ -87,9 +89,9 @@ public abstract class AndroidGame extends Activity implements Game {
     }
 
     private void makeActivityFullScreen() {
-        //Flag for the "no title" feature, turning off the title at the top of the screen.
+        // flag for the "no title" feature, turning off the title at the top of the screen.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //Full screen activity
+        // full screen activity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
@@ -101,14 +103,14 @@ public abstract class AndroidGame extends Activity implements Game {
         wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
         screen.resume();
         //start a new Thread for view rendering
-//        renderView.resume();
+        renderView.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         wakeLock.release();
-//        renderView.pause();
+        renderView.pause();
         screen.pause();
 
         if (isFinishing())

@@ -29,7 +29,6 @@ public class MainActivity extends AndroidGame {
         }
         InputStream lvl_1 = getResources().openRawResource(R.raw.map1);
         map_1 = convertStreamToString(lvl_1);
-        Log.w(TAG, "hello");
         InputStream lvl_2 = getResources().openRawResource(R.raw.map2);
         map_2 = convertStreamToString(lvl_2);
         return new SplashLoadingScreen(this);

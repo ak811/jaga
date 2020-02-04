@@ -4,6 +4,8 @@
     package="com.qkedy.jaga">
 
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".examples.dragon.screens.MainActivity">
+        <activity android:name=".examples.dragon.screens.MainActivity"
+            android:label="Dragon"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

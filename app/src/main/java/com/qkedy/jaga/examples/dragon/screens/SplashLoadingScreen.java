@@ -14,6 +14,7 @@ public class SplashLoadingScreen extends Screen {
 
     public SplashLoadingScreen(Game game) {
         super(game);
+        Log.w(TAG, "SplashLoadingScreen");
     }
 
     @Override
