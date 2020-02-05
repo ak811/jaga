@@ -2,8 +2,8 @@ package com.qkedy.jaga.models;
 
 import androidx.annotation.NonNull;
 
+import com.qkedy.jaga.examples.dragon.utils.Constants;
 import com.qkedy.jaga.interfaces.Input;
-import com.qkedy.jaga.utils.Constants;
 
 import static java.lang.Math.abs;
 

@@ -56,7 +56,7 @@ public class GameScreen extends Screen {
     public GameScreen(Game game, int lvl) {
         super(game);
 
-        background = new Background(0, 0);
+        background = new Background(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2);
         dragon = new Dragon();
 
         dragonAnim_r = new Animation();
@@ -152,20 +152,24 @@ public class GameScreen extends Screen {
 
     @Override
     public void update(float deltaTime) {
-        Log.w(TAG, "update");
-
         List touchEvents = game.getInput().getTouchEvents();
-
-        if (state == GameState.READY)
-            updateReady(touchEvents);
-        if (state == GameState.RUNNING)
-            updateRunning(touchEvents, deltaTime);
-        if (state == GameState.PAUSED)
-            updatePaused(touchEvents);
-        if (state == GameState.GAME_OVER)
-            updateGameOver(touchEvents);
-        if (state == GameState.WIN)
-            updateWin(touchEvents);
+        switch (state){
+            case READY:
+                updateReady(touchEvents);
+                break;
+            case RUNNING:
+                updateRunning(touchEvents, deltaTime);
+                break;
+            case PAUSED:
+                updatePaused(touchEvents);
+                break;
+            case GAME_OVER:
+                updateGameOver(touchEvents);
+                break;
+            case WIN:
+                updateWin(touchEvents);
+                break;
+        }
     }
 
     private void updateReady(List touchEvents) {
@@ -337,56 +341,23 @@ public class GameScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-
-        g.drawImage(Assets.background, background.getBgX(), background.getBgY(),
-                Constants.MAX_ALPHA, false, null, null);
-        paintTiles(g);
-
-        ArrayList fireball = dragon.getFireballs();
-        for (int i = 0; i < fireball.size(); i++) {
-            Fireball p = (Fireball) fireball.get(i);
-            if (((Fireball) fireball.get(i)).getSpeedX() < 0)
-                g.drawImage(Assets.fireball_l, p.getX(), p.getY(),
-                        Constants.MAX_ALPHA, false, null, null);
-            else
-                g.drawImage(Assets.fireball_r, p.getX(), p.getY(),
-                        Constants.MAX_ALPHA, false, null, null);
+        switch (state){
+            case READY:
+                drawReadyUI(g);
+                break;
+            case RUNNING:
+                drawRunningUI(g);
+                break;
+            case PAUSED:
+                drawPausedUI(g);
+                break;
+            case GAME_OVER:
+                drawGameOverUI(g);
+                break;
+            case WIN:
+                drawGameWin(g);
+                break;
         }
-
-        for (int e = 0; e < enemies.size(); e++) {
-            ArrayList fire = enemies.get(e).getFires();
-            for (int i = 0; i < fire.size(); i++) {
-                EnemyFire p = (EnemyFire) fire.get(i);
-                g.drawRect(p.getX(), p.getY(), 20, 10, Color.GREEN, Constants.MAX_ALPHA);
-            }
-        }
-
-        g.drawRect(Dragon.body, Color.GREEN, Constants.MAX_ALPHA);
-        g.drawRect(Dragon.bodyLeft, Color.RED, Constants.MAX_ALPHA);
-        g.drawRect(Dragon.bodyRight, Color.BLUE, Constants.MAX_ALPHA);
-        g.drawRect(Dragon.footLeft, Color.BLACK, Constants.MAX_ALPHA);
-        g.drawRect(Dragon.footRight, Color.WHITE, Constants.MAX_ALPHA);
-        g.drawRect(Dragon.verticalBodyLine, Color.YELLOW, Constants.MAX_ALPHA);
-
-        g.drawImage(currentSprite, dragon.getCenterX() - 61,
-                dragon.getCenterY() - 63, Constants.MAX_ALPHA, false, null, null);
-
-        for (int e = 0; e < enemies.size(); e++) {
-            g.drawImage(enemyAnim.getImage(), enemies.get(e).getCenterX() - 48,
-                    enemies.get(e).getCenterY() - 48, Constants.MAX_ALPHA,
-                    false, null, null);
-        }
-
-        if (state == GameState.READY)
-            drawReadyUI();
-        if (state == GameState.RUNNING)
-            drawRunningUI();
-        if (state == GameState.PAUSED)
-            drawPausedUI();
-        if (state == GameState.GAME_OVER)
-            drawGameOverUI();
-        if (state == GameState.WIN)
-            drawGameWin();
     }
 
     private void paintTiles(Graphics g) {
@@ -424,14 +395,51 @@ public class GameScreen extends Screen {
         System.gc();
     }
 
-    private void drawReadyUI() {
-        Graphics g = game.getGraphics();
+    private void drawReadyUI(Graphics g) {
         g.drawARGB(155, 0, 0, 0);
         g.drawString("Tap to Start.", new Point(980, 580), textStyle2, Constants.MAX_ALPHA);
     }
 
-    private void drawRunningUI() {
-        Graphics g = game.getGraphics();
+    private void drawRunningUI(Graphics g) {
+        g.drawImage(Assets.background, background.getBgX(), background.getBgY(),
+                Constants.MAX_ALPHA, false, null, null);
+        paintTiles(g);
+
+        ArrayList fireball = dragon.getFireballs();
+        for (int i = 0; i < fireball.size(); i++) {
+            Fireball p = (Fireball) fireball.get(i);
+            if (((Fireball) fireball.get(i)).getSpeedX() < 0)
+                g.drawImage(Assets.fireball_l, p.getX(), p.getY(),
+                        Constants.MAX_ALPHA, false, null, null);
+            else
+                g.drawImage(Assets.fireball_r, p.getX(), p.getY(),
+                        Constants.MAX_ALPHA, false, null, null);
+        }
+
+        for (int e = 0; e < enemies.size(); e++) {
+            ArrayList fire = enemies.get(e).getFires();
+            for (int i = 0; i < fire.size(); i++) {
+                EnemyFire p = (EnemyFire) fire.get(i);
+                g.drawRect(p.getX(), p.getY(), 20, 10, Color.GREEN, Constants.MAX_ALPHA);
+            }
+        }
+
+//        g.drawRect(Dragon.body, Color.GREEN, Constants.MAX_ALPHA);
+//        g.drawRect(Dragon.bodyLeft, Color.RED, Constants.MAX_ALPHA);
+//        g.drawRect(Dragon.bodyRight, Color.BLUE, Constants.MAX_ALPHA);
+//        g.drawRect(Dragon.footLeft, Color.BLACK, Constants.MAX_ALPHA);
+//        g.drawRect(Dragon.footRight, Color.WHITE, Constants.MAX_ALPHA);
+//        g.drawRect(Dragon.verticalBodyLine, Color.YELLOW, Constants.MAX_ALPHA);
+
+        g.drawImage(currentSprite, dragon.getCenterX() - 61,
+                dragon.getCenterY() - 63, Constants.MAX_ALPHA, false, null, null);
+
+        for (int e = 0; e < enemies.size(); e++) {
+            g.drawImage(enemyAnim.getImage(), enemies.get(e).getCenterX() - 48,
+                    enemies.get(e).getCenterY() - 48, Constants.MAX_ALPHA,
+                    false, null, null);
+        }
+
         g.drawCroppedImage(Assets.button, 0, 450, 0, 0, 100, 100,
                 Constants.MAX_ALPHA, false, null, null);
         g.drawCroppedImage(Assets.button, 0, 550, 0, 100, 100, 100,
@@ -449,23 +457,20 @@ public class GameScreen extends Screen {
         }
     }
 
-    private void drawPausedUI() {
-        Graphics g = game.getGraphics();
+    private void drawPausedUI(Graphics g) {
         // Darken the entire screen so you can display the PAUSED screen.
         g.drawARGB(125, 0, 0, 0);
         g.drawString("Resume", new Point(980, 540), textStyle2, Constants.MAX_ALPHA);
         g.drawString("Menu", new Point(980, 720), textStyle2, Constants.MAX_ALPHA);
     }
 
-    private void drawGameOverUI() {
-        Graphics g = game.getGraphics();
+    private void drawGameOverUI(Graphics g) {
         g.drawRect(0, 0, 1920, 1090, Color.BLACK, Constants.MAX_ALPHA);
         g.drawString("GAME OVER.", new Point(980, 540), textStyle, Constants.MAX_ALPHA);
         g.drawString("Tap to return.", new Point(980, 640), textStyle, Constants.MAX_ALPHA);
     }
 
-    private void drawGameWin() {
-        Graphics g = game.getGraphics();
+    private void drawGameWin(Graphics g) {
         g.drawARGB(125, 100, 60, 80);
         g.drawString("YOU WIN.", new Point(980, 540), textStyle2, Constants.MAX_ALPHA);
         g.drawString("Tap to return.", new Point(980, 640), textStyle, Constants.MAX_ALPHA);

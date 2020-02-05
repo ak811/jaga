@@ -368,21 +368,20 @@ public class AndroidGraphics implements Graphics {
 
     @Override
     public void drawImage(Image image, float x, float y) {
-////        int desWidth = image.getWidth();
-////        int desHeight = image.getHeight();
-//
-//        dstRect.left = (int) x - desWidth/* / 2*/;
-//        dstRect.top = (int) y - desHeight /*/ 2*/;
-//        dstRect.right = (int) (x + desWidth /*/ 2*/);
-//        dstRect.bottom = (int) (y + desHeight /*/ 2*/);
-//
-//        dstRect.left *= scaleX;
-//        dstRect.top *= scaleY;
-//        dstRect.right *= scaleX;
-//        dstRect.bottom *= scaleY;
-//
-//        canvas.drawBitmap(image.getBitmap(), null, dstRect, imagePaint);
-        canvas.drawBitmap(image.getBitmap(), x * scaleX, y * scaleY, paint);
+        int desWidth = image.getWidth();
+        int desHeight = image.getHeight();
+
+        dstRect.left = (int) x;
+        dstRect.top = (int) y;
+        dstRect.right = (int) (x + desWidth);
+        dstRect.bottom = (int) (y + desHeight);
+
+        dstRect.left *= scaleX;
+        dstRect.top *= scaleY;
+        dstRect.right *= scaleX;
+        dstRect.bottom *= scaleY;
+
+        canvas.drawBitmap(image.getBitmap(), null, dstRect, imagePaint);
     }
 
     @Override

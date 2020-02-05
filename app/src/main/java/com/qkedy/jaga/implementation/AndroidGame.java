@@ -13,13 +13,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.qkedy.jaga.examples.dragon.utils.Constants;
 import com.qkedy.jaga.interfaces.Audio;
 import com.qkedy.jaga.interfaces.FileIO;
 import com.qkedy.jaga.interfaces.Game;
 import com.qkedy.jaga.interfaces.Graphics;
 import com.qkedy.jaga.interfaces.Input;
 import com.qkedy.jaga.interfaces.Screen;
-import com.qkedy.jaga.utils.Constants;
 
 import org.json.JSONException;
 
