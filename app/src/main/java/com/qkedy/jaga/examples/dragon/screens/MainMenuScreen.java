@@ -1,13 +1,10 @@
 package com.qkedy.jaga.examples.dragon.screens;
 
-import android.util.Log;
-
 import com.qkedy.jaga.examples.dragon.utils.Assets;
 import com.qkedy.jaga.interfaces.Game;
 import com.qkedy.jaga.interfaces.Graphics;
 import com.qkedy.jaga.interfaces.Input;
 import com.qkedy.jaga.interfaces.Screen;
-import com.qkedy.jaga.utils.Constants;
 
 import java.util.List;
 
@@ -17,13 +14,12 @@ public class MainMenuScreen extends Screen {
 
     private final String TAG = MainMenuScreen.class.getSimpleName();
 
-    public MainMenuScreen(Game game) {
+    MainMenuScreen(Game game) {
         super(game);
     }
 
     @Override
     public void update(float deltaTime) {
-        Log.w(TAG, "update");
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {

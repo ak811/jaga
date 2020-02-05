@@ -14,14 +14,12 @@ public class LoadingScreen extends Screen {
 
     private final String TAG = LoadingScreen.class.getSimpleName();
 
-    public LoadingScreen(Game game) {
+    LoadingScreen(Game game) {
         super(game);
     }
 
     @Override
     public void update(float deltaTime) {
-        Log.w(TAG, "update");
-
         Graphics g = game.getGraphics();
 
         Assets.menu = g.newImage("menu.png", Config.ARGB_8888);

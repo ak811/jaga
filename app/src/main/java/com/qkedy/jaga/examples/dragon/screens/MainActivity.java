@@ -62,7 +62,7 @@ public class MainActivity extends AndroidGame {
     @Override
     public void onResume() {
         super.onResume();
-        Assets.music.play();
+//        Assets.music.play();
     }
 
     @Override

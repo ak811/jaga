@@ -31,7 +31,7 @@ public class Assets {
         music = mainActivity.getAudio().createMusic("game_music.mp3");
         music.setLooping(true);
         music.setVolume(0.85f);
-        music.play();
+//        music.play();
     }
 
 }

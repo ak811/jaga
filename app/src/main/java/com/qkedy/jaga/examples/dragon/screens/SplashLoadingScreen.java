@@ -12,14 +12,12 @@ public class SplashLoadingScreen extends Screen {
 
     private final String TAG = SplashLoadingScreen.class.getSimpleName();
 
-    public SplashLoadingScreen(Game game) {
+    SplashLoadingScreen(Game game) {
         super(game);
-        Log.w(TAG, "SplashLoadingScreen");
     }
 
     @Override
     public void update(float deltaTime) {
-        Log.w(TAG, "update");
         Graphics g = game.getGraphics();
         Assets.splash = g.newImage("splash.png", Bitmap.Config.ARGB_8888);
         game.setScreen(new LoadingScreen(game));

@@ -58,8 +58,9 @@ public interface Input extends TouchHandler {
          * @apiNote sets the point of touch event
          */
         public void setPoint(Point point) {
-            this.point.setX(point.getX());
-            this.point.setY(point.getY());
+//            this.point.setX(point.getX());
+//            this.point.setY(point.getY());
+            this.point = point;
         }
 
         /**

@@ -22,8 +22,6 @@ public class AndroidFastRenderView extends View {
         fpsStartTime = System.currentTimeMillis();
 
         startTime = System.nanoTime();
-
-        Log.w(TAG, "AndroidFastRenderView");
     }
 
     @Override
@@ -37,8 +35,6 @@ public class AndroidFastRenderView extends View {
         startTime = System.nanoTime();
         if (deltaTime > 3.15)
             deltaTime = 3.15f;
-
-        Log.w(TAG, "onDraw");
 
         game.getCurrentScreen().update(deltaTime);
         game.getCurrentScreen().paint(deltaTime);

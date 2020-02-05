@@ -20,7 +20,7 @@ public class LevelSelectionScreen extends Screen {
 
     private Paint textStyle2;
 
-    public LevelSelectionScreen(Game game) {
+    LevelSelectionScreen(Game game) {
         super(game);
         textStyle2 = new Paint();
         textStyle2.setTextSize(100);
@@ -31,7 +31,6 @@ public class LevelSelectionScreen extends Screen {
 
     @Override
     public void update(float deltaTime) {
-        Log.w(TAG, "update");
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
