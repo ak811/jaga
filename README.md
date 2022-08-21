@@ -6,7 +6,7 @@
 
 <!-- ### Here are some games developed using this framework for several companies: -->
 <!-- ### The following are some examples of games I've developed using this framework for several companies: -->
-### The following are some examples of games developed using this framework for several companies:
+### The following are some examples of games developed using this framework:
 
 <br>
 
