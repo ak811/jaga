@@ -15,12 +15,17 @@ Jaga is a 2D/3D free and open-source game development framework written in the J
   * git clone git://github.com/ak811/jaga.git
   ```
 #### 2. Import the project via Android Studio:
+  ```
   * File -> Open -> Jaga root build.gradle
   * Import the project
   * Wait until everything is synced and indexed
   * Make sure the Gradle sync succeeds
-#### 3. Done! If you set everything up correctly, you can try to run the sample Dragon game on your Android phone.
+  ```
+#### 3. Done!
+  ```
+  * If you set everything up correctly, you can try to run the sample Dragon game on your Android phone.
   * The documentations will be provided soon.
+  ```
 <!-- View Documentation -->
  
 <br>
