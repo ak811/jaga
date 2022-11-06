@@ -5,7 +5,7 @@
 <br>
 
 ## Overview
-Jaga is a 2D/3D free and open-source game development framework written in the Java programming language. It facilitates the development of Android games on the same code base. Jaga does not force a coding style or particular design on you. Instead, it gives you the freedom to develop a game the way you like it. With Jaga, you can develop Android games with a significantly smaller size compared to other frameworks and engines.
+Jaga is a 2D/3D free and open-source game development framework written in Java programming language. It facilitates the development of Android games on the same code base. Jaga does not force a coding style or particular design on you. Instead, it gives you the freedom to develop a game the way you like it. With Jaga, you can develop Android games with a significantly smaller size compared to other frameworks and engines.
 
 <br>
 
