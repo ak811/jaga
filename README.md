@@ -24,7 +24,7 @@ Jaga is a 2D/3D free and open-source game development framework written in Java 
 #### 3. Done!
   ```
   * If you set everything up correctly, you can try to run the sample Dragon game on your Android phone.
-  * The documentations will be provided soon.
+  * The documentation will be provided soon.
   ```
 <!-- View Documentation -->
  
@@ -32,7 +32,7 @@ Jaga is a 2D/3D free and open-source game development framework written in Java 
 
 ## Samples
 <!-- ### Here are some games developed using this framework for several companies: -->
-<!-- ### The following are some examples of games I've developed using this framework for several companies: -->
+<!-- ### The following are some examples of games I have developed using this framework for several companies: -->
 #### The following are some examples of games developed using this framework:
 
  * ### Talisman
